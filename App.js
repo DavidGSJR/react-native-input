@@ -4,6 +4,8 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 
 function App() {
   const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [salary, setSalary] = useState('');
   const[input, setInput] = useState('');
 
   function saveInfo(){
@@ -12,21 +14,48 @@ function App() {
       return
     }
 
+    if(age == ''){
+      alert('Preencha o campo idade!')
+      return
+    }
+
+    if(salary == ''){
+      alert('Preencha o campo salario!')
+      return
+    }
+
     setName(input)
+    setName(age)
+    setName(salary)
   }
   return (
     <View>
       <View>
-        <Image source={require('./assets/favicon.png')}/>
         <TextInput style={styles.input}
         placeholder = 'Digite seu nome'
         onChangeText={(text) => setInput(text)}/>
+
+        <TextInput style={styles.input}
+        placeholder = 'Digite sua idade'
+        onChangeText={(text) => setAge(text)}/>
+
+        <TextInput style={styles.input}
+        placeholder = 'Digite seu salario'
+        onChangeText={(text) => setSalary(text)}/>
 
         <TouchableOpacity onPress={saveInfo} style={styles.button}>
           <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
 
-        <Text style={{fontSize: 40}}>{name}</Text>
+        {name && age && salary && (
+          <>
+            <Text style={{fontSize: 40}}>{name}</Text>
+            <Text style={{fontSize: 40}}>{age}</Text>
+            <Text style={{fontSize: 40}}>{salary}</Text>
+          </>
+          
+        )}
+        
       </View>
       <StatusBar style="auto" />
     </View>
